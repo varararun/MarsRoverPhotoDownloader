@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mars Rover Photo Downloader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Mars Rover Photo Downloader</h1>
+
+<form action="#" th:action="@{/}" th:object="${model}" method="post">
+    <p>Camera Type:
+        <select type="text" th:field="*{camera}">
+            <option value="fhaz">FHAZ</option>
+            <option value="navcam">NAVCAM</option>
+            <option value="mast">MAST</option>
+            <option value="chemcam">CHEMCAM</option>
+            <option value="mahli">MAHLI</option>
+            <option value="mardi">MARDI</option>
+            <option value="rhaz">RHAZ</option>
+
+            <option value="">ALL</option>
+        </select>
+    </p>
+    <p>Date:
+        <input type="text" placeholder="YYYY-MM-DD" th:field="*{date}"/>
+    </p>
+
+    <p>Number of Photos to download (0-100):
+        <input type="number" min="1" max="100" th:field="*{limit}"/>
+    </p>
+
+    <p>Dry Run?
+        <input type="checkbox" th:field="*{dryRun}"/>
+    </p>
+    <p>
+        <input type="submit" value="Download"/>
+        <input type="reset" value="Reset"/>
+    </p>
+</form>
+</body>
+</html>

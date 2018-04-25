@@ -1,0 +1,44 @@
+###################################
+####### WRITTEN BY VARARUN ########
+###################################
+
+### OS FILES ###
+## OSX Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+### IDEs ###
+## Eclipse
+.project
+.settings/
+.*.md.html
+## IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+## Netbeans
+nbproject/private/
+build/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+# Sublime
+*.sublime-project
+*.sublime-workspace
+## Visual Studio
+.vscode/
+
+### BUILD ###
+## Gradle
+.gradle/
+
+### JAVA ###
+## Jenv
+.java-version

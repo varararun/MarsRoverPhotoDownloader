@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mars Rover Photo Downloader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Result</h1>
+
+<h3>Parameters:</h3>
+<li th:text="'camera type: ' + ${model.camera ?: 'all'}"/>
+<li th:text="'date: ' + ${model.date}"/>
+<li th:text="'limit: ' + ${model.limit}"/>
+<li th:text="'dry run: ' + ${model.dryRun}"/>
+
+<h3 th:text="'Output for ' + ${#lists.size(model.images)} + ' image(s):'"/>
+<li th:each="image : ${model.images}" th:text="${image}"/>
+</body>
+</html>

@@ -1,0 +1,5 @@
+external.nasa.marsrover.api: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
+external.nasa.marsrover.api.key: "LDG7MIbb5ARaqFobCFCbLAuJmmsdWUkjIKip40ou"
+download.directory: "./downloads/"
+logging.level.com.avarghese.marsrover: DEBUG
+server.port: 8090
