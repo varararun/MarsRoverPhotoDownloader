@@ -8,12 +8,15 @@
 <h1>Result</h1>
 
 <h3>Parameters:</h3>
-<li th:text="'camera type: ' + ${model.camera ?: 'all'}"/>
-<li th:text="'date: ' + ${model.date}"/>
-<li th:text="'limit: ' + ${model.limit}"/>
-<li th:text="'dry run: ' + ${model.dryRun}"/>
-
+<ul>
+    <li th:text="'camera type: ' + ${model.camera ?: 'all'}"/>
+    <li th:text="'date: ' + ${model.date}"/>
+    <li th:text="'limit: ' + ${model.limit}"/>
+    <li th:text="'dry run: ' + ${model.dryRun}"/>
+</ul>
 <h3 th:text="'Output for ' + ${#lists.size(model.images)} + ' image(s):'"/>
-<li th:each="image : ${model.images}" th:text="${image}"/>
+<ul>
+    <li th:each="image : ${model.images}" th:text="${image}"/>
+</ul>
 </body>
 </html>
