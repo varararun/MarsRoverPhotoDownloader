@@ -12,7 +12,7 @@ public class Model {
 
 	private boolean dryRun;
 
-	private List<String> images;
+	private List<String> results;
 
 	public String getCamera() {
 		return camera;
@@ -46,11 +46,11 @@ public class Model {
 		this.dryRun = dryRun;
 	}
 
-	public List<String> getImages() {
-		return images;
+	public List<String> getResults() {
+		return results;
 	}
 
-	public void setImages(List<String> images) {
-		this.images = images;
+	public void setResults(List<String> results) {
+		this.results = results;
 	}
 }

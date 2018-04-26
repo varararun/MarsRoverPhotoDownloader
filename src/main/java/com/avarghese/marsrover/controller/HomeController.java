@@ -25,7 +25,7 @@ public class HomeController {
 	@PostMapping("/")
 	public String querySubmit(@ModelAttribute Model model) {
 		List<String> results = client.getPhotos(model.getCamera(), model.getDate(), model.getLimit(), model.isDryRun());
-		model.setImages(results);
+		model.setResults(results);
 		return "result";
 	}
 

@@ -14,9 +14,9 @@
     <li th:text="'limit: ' + ${model.limit}"/>
     <li th:text="'dry run: ' + ${model.dryRun}"/>
 </ul>
-<h3 th:text="'Output for ' + ${#lists.size(model.images)} + ' image(s):'"/>
+<h3>Download Results:</h3>
 <ul>
-    <li th:each="image : ${model.images}" th:text="${image}"/>
+    <li th:each="result : ${model.results}" th:text="${result}"/>
 </ul>
 </body>
 </html>

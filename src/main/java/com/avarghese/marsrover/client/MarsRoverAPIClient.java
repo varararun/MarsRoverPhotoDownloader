@@ -36,15 +36,29 @@ public class MarsRoverAPIClient {
 		log.info("Retrieving and downloading photos using the following parameters, " +
 				"camera=" + camera + ", " +
 				"date=" + date);
-		List<String> outputList;
+		List<String> outputList = new ArrayList<>();
+		Images images;
 		String url = new MarsRoverAPIQueryBuilder()
 				.withBasePath(basePath)
 				.withApiKey(apiKey)
 				.withCamera(camera)
 				.withDate(date)
 				.build();
-		Images images = restTemplate.getForObject(url, Images.class);
-		outputList = new ArrayList<>();
+		try {
+			images = restTemplate.getForObject(url, Images.class);
+			if(images == null || images.getPhotos() == null){
+				throw new Exception("Check parameters, no images found");
+			}
+			if(images.getPhotos().size() == 0){
+				outputList.add("No images found");
+				return outputList;
+			}
+		} catch(Exception e){
+			outputList.add("Exception calling API: " + e.getMessage());
+			log.error("Error calling API", e);
+			return outputList;
+		}
+
 		log.info("Retrieved " + images.getPhotos().size() + " image(s), downloading " + limit + " image(s)");
 		for (int i = 0; i < images.getPhotos().size(); i++) {
 			Photo photo = images.getPhotos().get(i);

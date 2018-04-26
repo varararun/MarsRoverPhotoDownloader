@@ -43,8 +43,12 @@ public class MarsRoverAPIQueryBuilder {
 		return this;
 	}
 
+	public MarsRoverAPIQueryBuilder withPage(int page) {
+		query.append(PAGE_PARAM + page + AMPERSAND);
+		return this;
+	}
+
 	public String build() {
-		query.append(PAGE_PARAM + DEFAULT_PAGE + AMPERSAND);
 		log.info("URL: " + query);
 		return query.toString();
 	}
