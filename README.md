@@ -34,7 +34,8 @@
 #### TODO - Future State
 1. Enhancement to extract client and build service jar
 2. Include command line runner implementation so the required params can be passed as command line arguments
-3. Include performance tests and static code analysis 
+3. Include performance tests 
+4. Threaded calls 
 
 ## Challenge Details
 

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +28,14 @@ public class FlatFileImagePublisher implements ImagePublisher {
 	public String publishImage(String imageUrl, String fileDirectory, String fileName) {
 		String path = downloadsDirectory + fileDirectory + FORWARD_SLASH + fileName;
 		String output;
+
+		File fileToDownload = new File(path);
+		if (fileToDownload.exists()) {
+			output = "File has already been downloaded: " + fileName;
+			log.info(output);
+			return output;
+		}
+
 		try {
 			Files.createDirectories(Paths.get(downloadsDirectory + fileDirectory));
 		} catch (IOException ioException) {
@@ -39,7 +48,6 @@ public class FlatFileImagePublisher implements ImagePublisher {
 				InputStream is = new URL(imageUrl).openStream();
 				OutputStream os = new FileOutputStream(path);
 		) {
-
 			byte[] b = new byte[2048];
 			int length;
 			while ((length = is.read(b)) != -1) {
