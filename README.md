@@ -20,13 +20,26 @@
 #### To Run UI
 1. Configure properties in `~/src/main/resources/application.yml`
 2. Run `$ ./gradlew bootRun` in terminal/cmd
-3. Navigate to `localhost:8080` or check terminal/cmd for tomcat port info
+3. Navigate to `localhost:8090` or check terminal/cmd for tomcat port info
 4. Specify camera type, select ALL to download all images captured on that day
 5. Specify date, currently String input
 6. Specify number of images to download for that day, if number is larger than available images, it will be ignored
 7. Specify if this is a dry run, if checked, no actual images will be downloaded
 8. Submit and wait for results
 9. Check download directory for images
+
+#### To Run REST API or CommandLine
+1. Run `$ ./gradlew bootRun` in terminal/cmd
+2. Navigate to {basePath}/api/v1/photos/{date}?param1={value1}&param2={value2}&...
+3. Examples: 
+	- browser: `localhost:8090/api/v1/photos/2017-12-15?limit=1&dryRun=false&camera=FHAZ`
+	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?limit=1&dryRun=false&camera=FHAZ`
+
+| Param    | Description                           | Default |
+|:---------|:--------------------------------------|:--------|
+| camera   | Camera photos to download             |    null |
+| limit    | How many total photos to download     |     100 |
+| dryRun   | If true, skip actual photo download   |   false |
 
 #### To Run Tests
 1. Run `$ ./gradlew test` in terminal/cmd

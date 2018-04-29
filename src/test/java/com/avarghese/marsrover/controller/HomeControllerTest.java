@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -25,8 +26,8 @@ public class HomeControllerTest {
 	private TestRestTemplate restTemplate;
 
 	@Test
-	public void testQueryController() {
-		assertThat(controller).isNotNull();
+	public void testHomeController() {
+		assertNotNull(controller);
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
 				String.class)).contains("Mars Rover Photo");
 	}
