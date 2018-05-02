@@ -32,13 +32,12 @@
 1. Run `$ ./gradlew bootRun` in terminal/cmd
 2. Navigate to {basePath}/api/v1/photos/{date}?param1={value1}&param2={value2}&...
 3. Examples: 
-	- browser: `localhost:8090/api/v1/photos/2017-12-15?limit=1&dryRun=false&camera=FHAZ`
-	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?limit=1&dryRun=false&camera=FHAZ`
+	- browser: `localhost:8090/api/v1/photos/2017-12-15?dryRun=false&camera=FHAZ`
+	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?dryRun=false&camera=FHAZ`
 
 | Param    | Description                           | Default |
 |:---------|:--------------------------------------|:--------|
 | camera   | Camera photos to download             |    null |
-| limit    | How many total photos to download     |     100 |
 | dryRun   | If true, skip actual photo download   |   false |
 
 #### To Run Tests

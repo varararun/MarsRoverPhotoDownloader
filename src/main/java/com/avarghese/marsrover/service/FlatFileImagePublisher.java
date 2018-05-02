@@ -21,7 +21,7 @@ public class FlatFileImagePublisher implements ImagePublisher {
 
 	private static final String FORWARD_SLASH = "/";
 
-	@Value("${download.directory:'./downloads/'}")
+	@Value("${download.directory}")
 	protected String downloadsDirectory;
 
 	@Override
@@ -53,7 +53,7 @@ public class FlatFileImagePublisher implements ImagePublisher {
 			while ((length = is.read(b)) != -1) {
 				os.write(b, 0, length);
 			}
-			output = "Successfully saved " + imageUrl + "\n as " + path;
+			output = "Successfully saved " + imageUrl + "\\n AS " + fileDirectory + FORWARD_SLASH + fileName;
 			log.info(output);
 			return output;
 		} catch (Exception e) {

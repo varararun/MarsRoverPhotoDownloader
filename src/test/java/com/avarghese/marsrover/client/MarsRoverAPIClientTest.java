@@ -21,6 +21,8 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class MarsRoverAPIClientTest {
 
+	public final int GENERAL_OUTPUT_ADDED_COUNT = 2;
+
 	@Autowired
 	ImagePublisher mockImagePublisher;
 
@@ -40,44 +42,30 @@ public class MarsRoverAPIClientTest {
 	public void testGetPhotos_dryRun_verifyFileServiceNotInvoked() {
 		client.imagePublisher = mockImagePublisher;
 		client.restTemplate = mockRestTemplate;
+		Images images = buildMockPhotosObject();
 
-		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(buildMockPhotosObject());
-		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", 1, true);
+		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(images);
+		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", true);
 
 		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
 		verify(mockImagePublisher, times(0)).publishImage(anyString(), anyString(), anyString());
 
-		assertEquals(3, outputList.size());
+		assertEquals(images.getPhotos().size()+ GENERAL_OUTPUT_ADDED_COUNT, outputList.size());
 	}
 
 	@Test
 	public void testGetPhotos_verifyFileServiceInvoked() {
 		client.imagePublisher = mockImagePublisher;
 		client.restTemplate = mockRestTemplate;
+		Images images = buildMockPhotosObject();
 
-		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(buildMockPhotosObject());
-		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", 100, false);
+		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(images);
+		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", false);
 
 		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
 		verify(mockImagePublisher, times(3)).publishImage(anyString(), anyString(), anyString());
 
-		assertEquals(3, outputList.size());
-	}
-
-	@Test
-	public void testGetPhotos_verifyFileServiceInvoked_limitReached() {
-		client.imagePublisher = mockImagePublisher;
-		client.restTemplate = mockRestTemplate;
-
-		Images images = buildMockPhotosObject();
-		Photo photo = images.getPhotos().get(0);
-		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(buildMockPhotosObject());
-		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", 2, false);
-
-		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
-		verify(mockImagePublisher, times(2)).publishImage(anyString(), anyString(), anyString());
-
-		assertEquals(3, outputList.size());
+		assertEquals(images.getPhotos().size()+2, outputList.size());
 	}
 
 	private Images buildMockPhotosObject() {

@@ -13,7 +13,6 @@ public class MarsRoverAPIQueryBuilder {
 	private static final String PAGE_PARAM = "page=";
 	private static final String AMPERSAND = "&";
 	private static final String QUESTION_MARK = "?";
-	private static final int DEFAULT_PAGE = 0;
 
 	private StringBuilder query;
 

@@ -8,8 +8,6 @@ public class Model {
 
 	private String date;
 
-	private Integer limit;
-
 	private boolean dryRun;
 
 	private List<String> results;
@@ -28,14 +26,6 @@ public class Model {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-
-	public Integer getLimit() {
-		return limit;
-	}
-
-	public void setLimit(Integer limit) {
-		this.limit = limit;
 	}
 
 	public boolean isDryRun() {

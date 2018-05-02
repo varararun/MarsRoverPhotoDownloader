@@ -46,14 +46,12 @@ public class MarsRoverPhotosAPIControllerTest {
 
 		ArgumentCaptor<String> dateCaptor = ArgumentCaptor.forClass(String.class);
 		ArgumentCaptor<String> cameraCaptor = ArgumentCaptor.forClass(String.class);
-		ArgumentCaptor<Integer> limitCaptor = ArgumentCaptor.forClass(Integer.class);
 		ArgumentCaptor<Boolean> dryRunCaptor = ArgumentCaptor.forClass(Boolean.class);
 
-		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture(), limitCaptor.capture(), dryRunCaptor.capture())).thenReturn(new ArrayList<>());
+		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture(), dryRunCaptor.capture())).thenReturn(new ArrayList<>());
 		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01", List.class);
 		assertEquals(dateCaptor.getValue(), "2017-01-01");
 		assertEquals(cameraCaptor.getValue(), "");
-		assertEquals(limitCaptor.getValue().intValue(), 100);
 		assertEquals(dryRunCaptor.getValue(), false);
 	}
 
@@ -63,14 +61,12 @@ public class MarsRoverPhotosAPIControllerTest {
 
 		ArgumentCaptor<String> dateCaptor = ArgumentCaptor.forClass(String.class);
 		ArgumentCaptor<String> cameraCaptor = ArgumentCaptor.forClass(String.class);
-		ArgumentCaptor<Integer> limitCaptor = ArgumentCaptor.forClass(Integer.class);
 		ArgumentCaptor<Boolean> dryRunCaptor = ArgumentCaptor.forClass(Boolean.class);
 
-		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture(), limitCaptor.capture(), dryRunCaptor.capture())).thenReturn(new ArrayList<>());
-		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01?limit=1&camera=FHAZ&dryRun=true", List.class);
+		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture(), dryRunCaptor.capture())).thenReturn(new ArrayList<>());
+		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01?camera=FHAZ&dryRun=true", List.class);
 		assertEquals(dateCaptor.getValue(), "2017-01-01");
 		assertEquals(cameraCaptor.getValue(), "FHAZ");
-		assertEquals(limitCaptor.getValue().intValue(), 1);
 		assertEquals(dryRunCaptor.getValue(), true);
 	}
 }

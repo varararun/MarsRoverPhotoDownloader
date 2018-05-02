@@ -24,10 +24,9 @@ public class MarsRoverPhotosAPIController {
 	@GetMapping("/api/v1/photos/{date}")
 	public List<String> getMarsRoverPhotos(@PathVariable("date") String date,
 	                                       @RequestParam(name = "camera", defaultValue = "") String camera,
-	                                       @RequestParam(name = "limit", defaultValue = "100") int limit,
 	                                       @RequestParam(name = "dryRun", defaultValue = "false") boolean dryRun) {
-		log.info("Executing REST call with parameters, date={}, camera={}, limit={}, dryRun={}", date, camera, limit, dryRun);
-		List<String> results = client.getPhotos(camera, date, limit, dryRun);
+		log.info("Executing REST call with parameters, date={}, camera={}, dryRun={}", date, camera, dryRun);
+		List<String> results = client.getPhotos(camera, date, dryRun);
 		return results;
 	}
 }
