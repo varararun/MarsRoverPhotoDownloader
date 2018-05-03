@@ -2,11 +2,12 @@ package com.avarghese.marsrover.client;
 
 import com.avarghese.marsrover.domain.Images;
 import com.avarghese.marsrover.domain.Photo;
-import com.avarghese.marsrover.service.ImagePublisher;
+import com.avarghese.marsrover.service.PhotoPublisher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
@@ -14,17 +15,15 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MarsRoverAPIClientTest {
 
-	public final int GENERAL_OUTPUT_ADDED_COUNT = 2;
-
 	@Autowired
-	ImagePublisher mockImagePublisher;
+	@Qualifier(value = "threadedLocalPhotoPublisher")
+	PhotoPublisher mockPhotoPublisher;
 
 	@Autowired
 	RestTemplate mockRestTemplate;
@@ -33,39 +32,22 @@ public class MarsRoverAPIClientTest {
 
 	@Before
 	public void setUp() {
-		reset(mockImagePublisher);
+		reset(mockPhotoPublisher);
 		reset(mockRestTemplate);
 		client = new MarsRoverAPIClient("basePath", "apiKey");
 	}
 
 	@Test
-	public void testGetPhotos_dryRun_verifyFileServiceNotInvoked() {
-		client.imagePublisher = mockImagePublisher;
-		client.restTemplate = mockRestTemplate;
-		Images images = buildMockPhotosObject();
-
-		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(images);
-		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", true);
-
-		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
-		verify(mockImagePublisher, times(0)).publishImage(anyString(), anyString(), anyString());
-
-		assertEquals(images.getPhotos().size()+ GENERAL_OUTPUT_ADDED_COUNT, outputList.size());
-	}
-
-	@Test
 	public void testGetPhotos_verifyFileServiceInvoked() {
-		client.imagePublisher = mockImagePublisher;
+		client.photoPublisher = mockPhotoPublisher;
 		client.restTemplate = mockRestTemplate;
 		Images images = buildMockPhotosObject();
 
 		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(images);
-		List<String> outputList = client.getPhotos("cameraType", "2018-01-01", false);
+		List<String> outputList = client.getPhotos("cameraType", "2018-01-01");
 
 		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
-		verify(mockImagePublisher, times(3)).publishImage(anyString(), anyString(), anyString());
-
-		assertEquals(images.getPhotos().size()+2, outputList.size());
+		verify(mockPhotoPublisher, times(1)).publish(any());
 	}
 
 	private Images buildMockPhotosObject() {

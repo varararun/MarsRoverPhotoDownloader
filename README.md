@@ -24,7 +24,6 @@
 4. Specify camera type, select ALL to download all images captured on that day
 5. Specify date, currently String input
 6. Specify number of images to download for that day, if number is larger than available images, it will be ignored
-7. Specify if this is a dry run, if checked, no actual images will be downloaded
 8. Submit and wait for results
 9. Check download directory for images
 
@@ -32,13 +31,12 @@
 1. Run `$ ./gradlew bootRun` in terminal/cmd
 2. Navigate to {basePath}/api/v1/photos/{date}?param1={value1}&param2={value2}&...
 3. Examples: 
-	- browser: `localhost:8090/api/v1/photos/2017-12-15?dryRun=false&camera=FHAZ`
-	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?dryRun=false&camera=FHAZ`
+	- browser: `localhost:8090/api/v1/photos/2017-12-15?camera=FHAZ`
+	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?camera=FHAZ`
 
-| Param    | Description                           | Default |
-|:---------|:--------------------------------------|:--------|
-| camera   | Camera photos to download             |    null |
-| dryRun   | If true, skip actual photo download   |   false |
+| Param    | Description                           | Default | Required? | Values                                    |
+|:---------|:--------------------------------------|:--------|:----------|:------------------------------------------|
+| camera   | Camera photos to download             | null    | no        | FHAZ,NAVCAM,MAST,CHEMCAM,MAHLI,MARDI,RHAZ |
 
 #### To Run Tests
 1. Run `$ ./gradlew test` in terminal/cmd

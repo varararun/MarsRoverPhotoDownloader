@@ -8,8 +8,6 @@ public class Model {
 
 	private String date;
 
-	private boolean dryRun;
-
 	private List<String> results;
 
 	public String getCamera() {
@@ -26,14 +24,6 @@ public class Model {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-
-	public boolean isDryRun() {
-		return dryRun;
-	}
-
-	public void setDryRun(boolean dryRun) {
-		this.dryRun = dryRun;
 	}
 
 	public List<String> getResults() {
