@@ -11,10 +11,10 @@
 <ul>
     <li th:text="'camera type: ' + ${model.camera ?: 'all'}"/>
     <li th:text="'date: ' + ${model.date}"/>
-    <li th:text="'dry run: ' + ${model.dryRun}"/>
 </ul>
 <h3>Download Results:</h3>
 <ul>
+    <li th:text="'Output for ' + ${#lists.size(model.results)} + ' image(s)'"/>
     <li th:each="result : ${model.results}" th:text="${result}"/>
 </ul>
 </body>

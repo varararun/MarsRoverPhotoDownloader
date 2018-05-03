@@ -3,6 +3,10 @@ language: java
 jdk:
   - oraclejdk8
 
+branches:
+  only:
+  - master
+
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -12,4 +16,5 @@ cache:
     - $HOME/.gradle/wrapper/r/
 
 script:
+  - ./gradlew sonarqube -Dsonar.organization=vararun-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=b508158c5f2ad698df6785b9608b2906dc37628d -Dsonar.sources=src -Dsonar.java.binaries=build/classes -Dsonar.java.libraries=gradle/**/*.jar -Dsonar.test.inclusions=src/test/** -Dsonar.exclusions=src/test/
   - ./gradlew clean test

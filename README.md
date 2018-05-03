@@ -1,19 +1,16 @@
 [![Build Status](https://travis-ci.org/varararun/MarsRoverPhotoDownloader.svg?branch=master)](https://travis-ci.org/varararun/MarsRoverPhotoDownloader)
+![Quality Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=alert_status)
 ![Maintainability Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=sqale_rating)
 ![Coverage Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=coverage)
 ![Bugs Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=bugs)
 ![Vulnerabilities Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=vulnerabilities)
 
 ## Notes
-<!--
-0. to run sonar report:
- ./gradlew sonarqube   -Dsonar.organization=vararun-github   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=b508158c5f2ad698df6785b9608b2906dc37628d -Dsonar.sources=src -Dsonar.java.binaries=build/classes -Dsonar.java.libraries=gradle/**/*.jar -Dsonar.test.inclusions=src/test/** -Dsonar.exclusions=src/test/**
- https://sonarcloud.io/dashboard?id=MarsRoverPhotoDownloader
--->
 1. All photos are saved to relative `./downloads` directory
 2. Photos are in a nested directory, divided by `earth_date` param, using the following format: `yyyy-mm-dd` 
 3. Built with java 1.8
-4. Currently integrated with Travis-CI and Sonar for CI and Code Analysis, respectively
+4. Currently integrated with Travis-CI HoundCI, & Sonar for CI, Checkstyles, & Code Analysis, respectively
+5. Sonar report: https://sonarcloud.io/dashboard?id=MarsRoverPhotoDownloader
 
 ## Solution
 
@@ -24,7 +21,6 @@
 4. Specify camera type, select ALL to download all images captured on that day
 5. Specify date, currently String input
 6. Specify number of images to download for that day, if number is larger than available images, it will be ignored
-7. Specify if this is a dry run, if checked, no actual images will be downloaded
 8. Submit and wait for results
 9. Check download directory for images
 
@@ -32,13 +28,12 @@
 1. Run `$ ./gradlew bootRun` in terminal/cmd
 2. Navigate to {basePath}/api/v1/photos/{date}?param1={value1}&param2={value2}&...
 3. Examples: 
-	- browser: `localhost:8090/api/v1/photos/2017-12-15?dryRun=false&camera=FHAZ`
-	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?dryRun=false&camera=FHAZ`
+	- browser: `localhost:8090/api/v1/photos/2017-12-15?camera=FHAZ`
+	- terminal/cmd: `$ curl localhost:8090/api/v1/photos/2017-12-15?camera=FHAZ`
 
-| Param    | Description                           | Default |
-|:---------|:--------------------------------------|:--------|
-| camera   | Camera photos to download             |    null |
-| dryRun   | If true, skip actual photo download   |   false |
+| Param    | Description                           | Default | Required? | Values                                    |
+|:---------|:--------------------------------------|:--------|:----------|:------------------------------------------|
+| camera   | Camera photos to download             | null    | no        | FHAZ,NAVCAM,MAST,CHEMCAM,MAHLI,MARDI,RHAZ |
 
 #### To Run Tests
 1. Run `$ ./gradlew test` in terminal/cmd

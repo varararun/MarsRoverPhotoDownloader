@@ -46,13 +46,11 @@ public class MarsRoverPhotosAPIControllerTest {
 
 		ArgumentCaptor<String> dateCaptor = ArgumentCaptor.forClass(String.class);
 		ArgumentCaptor<String> cameraCaptor = ArgumentCaptor.forClass(String.class);
-		ArgumentCaptor<Boolean> dryRunCaptor = ArgumentCaptor.forClass(Boolean.class);
 
-		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture(), dryRunCaptor.capture())).thenReturn(new ArrayList<>());
+		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture())).thenReturn(new ArrayList<>());
 		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01", List.class);
-		assertEquals(dateCaptor.getValue(), "2017-01-01");
-		assertEquals(cameraCaptor.getValue(), "");
-		assertEquals(dryRunCaptor.getValue(), false);
+		assertEquals("2017-01-01", dateCaptor.getValue());
+		assertEquals("", cameraCaptor.getValue());
 	}
 
 	@Test
@@ -61,12 +59,10 @@ public class MarsRoverPhotosAPIControllerTest {
 
 		ArgumentCaptor<String> dateCaptor = ArgumentCaptor.forClass(String.class);
 		ArgumentCaptor<String> cameraCaptor = ArgumentCaptor.forClass(String.class);
-		ArgumentCaptor<Boolean> dryRunCaptor = ArgumentCaptor.forClass(Boolean.class);
 
-		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture(), dryRunCaptor.capture())).thenReturn(new ArrayList<>());
-		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01?camera=FHAZ&dryRun=true", List.class);
-		assertEquals(dateCaptor.getValue(), "2017-01-01");
-		assertEquals(cameraCaptor.getValue(), "FHAZ");
-		assertEquals(dryRunCaptor.getValue(), true);
+		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture())).thenReturn(new ArrayList<>());
+		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01?camera=FHAZ", List.class);
+		assertEquals("2017-01-01", dateCaptor.getValue());
+		assertEquals("FHAZ", cameraCaptor.getValue());
 	}
 }
