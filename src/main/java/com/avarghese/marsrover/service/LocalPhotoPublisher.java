@@ -4,7 +4,6 @@ import com.avarghese.marsrover.domain.Photo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -43,34 +42,32 @@ public class LocalPhotoPublisher implements PhotoPublisher {
 				output = "File has already been downloaded: " + fileName;
 				log.info(output);
 				outputList.add(output);
-				continue;
-			}
-
-			try {
-				Files.createDirectories(Paths.get(path));
-			} catch (IOException ioException) {
-				output = ioException.getMessage();
-				log.error(output);
-				outputList.add(output);
-				continue;
-			}
-
-			try (
-					InputStream is = new URL(photo.getImgSrc()).openStream();
-					OutputStream os = new FileOutputStream(filePath);
-			) {
-				byte[] b = new byte[2048];
-				int length;
-				while ((length = is.read(b)) != -1) {
-					os.write(b, 0, length);
+			} else {
+				try {
+					Files.createDirectories(Paths.get(path));
+				} catch (IOException ioException) {
+					output = ioException.getMessage();
+					log.error(output);
+					outputList.add(output);
+					continue;
 				}
-				output = "Successfully saved " + photo.getImgSrc() + " as " + filePath;
-				log.info(output);
-				outputList.add(output);
-			} catch (Exception e) {
-				output = e.getMessage();
-				log.error(output);
-				outputList.add(output);
+				try (
+						InputStream is = new URL(photo.getImgSrc()).openStream();
+						OutputStream os = new FileOutputStream(filePath);
+				) {
+					byte[] b = new byte[2048];
+					int length;
+					while ((length = is.read(b)) != -1) {
+						os.write(b, 0, length);
+					}
+					output = "Successfully saved " + photo.getImgSrc() + " as " + filePath;
+					log.info(output);
+					outputList.add(output);
+				} catch (Exception e) {
+					output = e.getMessage();
+					log.error(output);
+					outputList.add(output);
+				}
 			}
 		}
 

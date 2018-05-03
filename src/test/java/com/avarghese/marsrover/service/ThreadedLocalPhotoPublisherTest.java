@@ -36,6 +36,8 @@ public class ThreadedLocalPhotoPublisherTest {
 		photoPublisher.downloadsDirectory = "./downloads/";
 		photoPublisher.context = mockContext;
 
+		List<String> output;
+
 		File testFile = new File("./src/test/resources/test.jpg");
 		File savedFile = new File("./downloads/test/test.jpg");
 		List<Photo> photos = new ArrayList<>();
@@ -49,6 +51,11 @@ public class ThreadedLocalPhotoPublisherTest {
 		assertEquals(false, savedFile.exists());
 		photoPublisher.publish(photos);
 		assertEquals(true, savedFile.exists());
+
+		output = photoPublisher.publish(photos);
+		assertEquals(true, savedFile.exists());
+		assertEquals("File has already been downloaded: ./downloads/test/test.jpg", output.get(0));
+
 		savedFile.delete();
 		savedFile.getParentFile().delete();
 	}

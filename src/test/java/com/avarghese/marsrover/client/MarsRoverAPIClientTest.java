@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
@@ -44,10 +45,26 @@ public class MarsRoverAPIClientTest {
 		Images images = buildMockPhotosObject();
 
 		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(images);
-		List<String> outputList = client.getPhotos("cameraType", "2018-01-01");
+		client.getPhotos("cameraType", "2018-01-01");
 
 		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
 		verify(mockPhotoPublisher, times(1)).publish(any());
+	}
+
+	@Test
+	public void testGetPhotos_verifyFileServiceNotInvoked_NoImagesFoundOutput() {
+		client.photoPublisher = mockPhotoPublisher;
+		client.restTemplate = mockRestTemplate;
+		Images images = buildMockPhotosObject();
+		images.getPhotos().clear();
+
+		when(mockRestTemplate.getForObject(anyString(), any())).thenReturn(images);
+		List<String> output = client.getPhotos("cameraType", "2018-01-01");
+
+		verify(mockRestTemplate, times(1)).getForObject(anyString(), any());
+		verify(mockPhotoPublisher, times(0)).publish(any());
+
+		assertEquals("No image(s) found", output.get(0));
 	}
 
 	private Images buildMockPhotosObject() {

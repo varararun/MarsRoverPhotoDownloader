@@ -49,8 +49,8 @@ public class MarsRoverPhotosAPIControllerTest {
 
 		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture())).thenReturn(new ArrayList<>());
 		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01", List.class);
-		assertEquals(dateCaptor.getValue(), "2017-01-01");
-		assertEquals(cameraCaptor.getValue(), "");
+		assertEquals("2017-01-01", dateCaptor.getValue());
+		assertEquals("", cameraCaptor.getValue());
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class MarsRoverPhotosAPIControllerTest {
 
 		when(mockClient.getPhotos(cameraCaptor.capture(), dateCaptor.capture())).thenReturn(new ArrayList<>());
 		restTemplate.getForEntity("http://localhost:" + port + "/api/v1/photos/2017-01-01?camera=FHAZ", List.class);
-		assertEquals(dateCaptor.getValue(), "2017-01-01");
-		assertEquals(cameraCaptor.getValue(), "FHAZ");
+		assertEquals("2017-01-01", dateCaptor.getValue());
+		assertEquals("FHAZ", cameraCaptor.getValue());
 	}
 }

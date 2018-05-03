@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,8 +38,7 @@ public class ThreadedLocalPhotoPublisher implements PhotoPublisher {
 		for (int i = 0; i < photos.size(); i++) {
 			Photo photo = photos.get(i);
 			String imageUrl = photo.getImgSrc();
-			FilePublisherThread thread = context.getBean(FilePublisherThread.class, String.valueOf(i));
-			thread.setParameters(downloadsDirectory, fileDirectory, imageUrl);
+			FilePublisherThread thread = context.getBean(FilePublisherThread.class, downloadsDirectory, fileDirectory, imageUrl);
 			tasks.add(thread);
 		}
 		try {

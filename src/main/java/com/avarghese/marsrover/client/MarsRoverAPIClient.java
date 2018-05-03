@@ -47,7 +47,7 @@ public class MarsRoverAPIClient {
 		try {
 			images = restTemplate.getForObject(url, Images.class);
 			if (images == null || images.getPhotos() == null) {
-				throw new Exception("Check parameters, no images found");
+				throw new IllegalArgumentException("Check parameters, no images found");
 			}
 			imageCount = images.getPhotos().size();
 			if (imageCount == 0) {

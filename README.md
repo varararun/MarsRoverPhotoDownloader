@@ -1,19 +1,16 @@
 [![Build Status](https://travis-ci.org/varararun/MarsRoverPhotoDownloader.svg?branch=master)](https://travis-ci.org/varararun/MarsRoverPhotoDownloader)
+![Quality Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=alert_status)
 ![Maintainability Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=sqale_rating)
 ![Coverage Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=coverage)
 ![Bugs Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=bugs)
 ![Vulnerabilities Status](https://sonarcloud.io/api/project_badges/measure?project=MarsRoverPhotoDownloader&metric=vulnerabilities)
 
 ## Notes
-<!--
-0. to run sonar report:
- ./gradlew sonarqube   -Dsonar.organization=vararun-github   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=b508158c5f2ad698df6785b9608b2906dc37628d -Dsonar.sources=src -Dsonar.java.binaries=build/classes -Dsonar.java.libraries=gradle/**/*.jar -Dsonar.test.inclusions=src/test/** -Dsonar.exclusions=src/test/**
- https://sonarcloud.io/dashboard?id=MarsRoverPhotoDownloader
--->
 1. All photos are saved to relative `./downloads` directory
 2. Photos are in a nested directory, divided by `earth_date` param, using the following format: `yyyy-mm-dd` 
 3. Built with java 1.8
-4. Currently integrated with Travis-CI and Sonar for CI and Code Analysis, respectively
+4. Currently integrated with Travis-CI HoundCI, & Sonar for CI, Checkstyles, & Code Analysis, respectively
+5. Sonar report: https://sonarcloud.io/dashboard?id=MarsRoverPhotoDownloader
 
 ## Solution
 

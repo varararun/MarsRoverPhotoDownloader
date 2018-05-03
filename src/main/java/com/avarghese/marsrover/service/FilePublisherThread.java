@@ -27,11 +27,7 @@ public class FilePublisherThread implements Callable<String> {
 	private String fileDirectory;
 	private String imageUrl;
 
-	public FilePublisherThread(String request) {
-
-	}
-
-	public void setParameters(String downloadsDirectory, String fileDirectory, String imageUrl) {
+	public FilePublisherThread(String downloadsDirectory, String fileDirectory, String imageUrl) {
 		this.downloadsDirectory = downloadsDirectory;
 		this.fileDirectory = fileDirectory;
 		this.imageUrl = imageUrl;
